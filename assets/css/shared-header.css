@@ -1,0 +1,266 @@
+.site-header {
+  position: fixed;
+  inset: 0 0 auto;
+  z-index: 1000;
+}
+
+.nav-shell {
+  width: min(1480px, calc(100vw - 40px));
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  padding: 7px 26px;
+  border-radius: 20px;
+  background: #00a3e0;
+  box-shadow: 0 16px 40px rgba(41, 116, 181, 0.22);
+  font-family:
+    ui-sans-serif,
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    Segoe UI,
+    Roboto,
+    Helvetica Neue,
+    Arial,
+    Noto Sans,
+    sans-serif,
+    Apple Color Emoji,
+    Segoe UI Emoji,
+    Segoe UI Symbol,
+    Noto Color Emoji;
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  margin-right: 0;
+  padding: 6px;
+  border-radius: 14px;
+  transition: background-color 180ms ease;
+}
+
+.brand:hover,
+.brand:focus-visible {
+  background: rgba(255, 255, 255, 0.1);
+  outline: none;
+}
+
+.brand img {
+  width: 34px;
+  height: 34px;
+  object-fit: contain;
+  display: block;
+}
+
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex: 1 1 auto;
+  gap: 28px;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-item {
+  position: relative;
+}
+
+.nav-item > a,
+.nav-action {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: transparent;
+  border: 0;
+  color: rgba(255, 255, 255, 0.96);
+  font-size: 13px;
+  font-weight: 400;
+  padding: 9px 11px;
+  border-radius: 12px;
+  text-decoration: none;
+  transition: background-color 180ms ease, transform 180ms ease;
+  cursor: pointer;
+}
+
+.nav-item > a::after {
+  content: "⌄";
+  font-size: 12px;
+  opacity: 0.7;
+}
+
+.nav-item:hover > a,
+.nav-action:hover,
+.nav-item > a:focus-visible,
+.nav-action:focus-visible {
+  background: rgba(255, 255, 255, 0.12);
+  transform: translateY(-1px);
+  outline: none;
+}
+
+.dropdown {
+  position: absolute;
+  top: calc(100% + 14px);
+  right: 0;
+  min-width: 250px;
+  padding: 14px;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.98);
+  box-shadow: 0 18px 45px rgba(36, 53, 85, 0.08);
+  border: 1px solid rgba(83, 114, 151, 0.12);
+  display: grid;
+  gap: 8px;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px);
+  transition: all 180ms ease;
+}
+
+.dropdown a {
+  color: #131b35;
+  font-size: 14px;
+  font-weight: 400;
+  padding: 8px 12px;
+  border-radius: 12px;
+  text-decoration: none;
+}
+
+.dropdown a:hover,
+.dropdown a:focus-visible {
+  background: rgba(82, 169, 230, 0.12);
+  color: #00a3e0;
+  outline: none;
+}
+
+.nav-item:hover .dropdown,
+.nav-item:focus-within .dropdown {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  flex-shrink: 0;
+}
+
+.menu-toggle {
+  display: none;
+  background: transparent;
+  border: 0;
+  padding: 0;
+}
+
+.page-with-shared-header {
+  padding-top: 86px;
+  background: #fff;
+}
+
+.step-page {
+  padding-bottom: 55px;
+}
+
+.step-fixed-actions {
+  position: fixed;
+  left: 50%;
+  bottom: 16px;
+  transform: translateX(-50%);
+  width: min(448px, calc(100vw - 48px));
+  display: flex;
+  gap: 12px;
+  z-index: 950;
+}
+
+.step-fixed-actions > * {
+  flex: 1 1 0;
+}
+
+.step-fixed-actions--single > * {
+  flex-basis: 100%;
+}
+
+@media (max-width: 900px) {
+  .nav-shell {
+    width: min(100vw - 24px, 100%);
+    padding: 7px 18px;
+    flex-wrap: wrap;
+  }
+
+  .menu-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    border-radius: 14px;
+  }
+
+  .menu-toggle img {
+    width: 22px;
+    height: auto;
+    display: block;
+    filter: brightness(0) invert(1);
+  }
+
+  .navbar {
+    display: none;
+    width: 100%;
+    flex-direction: column;
+    align-items: stretch;
+    padding-top: 8px;
+  }
+
+  .navbar.is-open {
+    display: flex;
+  }
+
+  .nav-links,
+  .nav-actions {
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+  }
+
+  .nav-item > a,
+  .nav-action {
+    justify-content: space-between;
+  }
+
+  .dropdown {
+    position: static;
+    margin-top: 8px;
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+    display: none;
+    min-width: 0;
+  }
+
+  .nav-item.is-open .dropdown {
+    display: grid;
+  }
+
+  .page-with-shared-header {
+    padding-top: 84px;
+  }
+
+  .step-page {
+    padding-bottom: 55px;
+  }
+
+  .step-fixed-actions {
+    width: min(448px, calc(100vw - 32px));
+    bottom: 12px;
+  }
+}

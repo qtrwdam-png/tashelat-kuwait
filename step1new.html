@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>حاسبة التمويل - CFC</title>
+  <meta name="description" content="حاسبة تمويل جديدة" />
+  <link rel="icon" type="image/svg+xml" href="./assets/images/logo.svg" />
+  <link href="./assets/css/main.css" rel="stylesheet" type="text/css" />
+  <link rel="stylesheet" href="./assets/css/styles.css" />
+  <link rel="stylesheet" href="./assets/css/shared-header.css" />
+  <style>
+    body {
+      margin: 0;
+      background: #f5f7fb;
+      font-family: Arial, sans-serif;
+    }
+
+    .page-shell {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 24px 16px 48px;
+    }
+
+    .topbar {
+      background: #2f2f2f;
+      color: #fff;
+      border-radius: 16px;
+      min-height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 18px;
+      margin-bottom: 20px;
+    }
+
+    .brand-wrap {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .brand-badge {
+      width: 54px;
+      height: 54px;
+      border-radius: 14px;
+      display: grid;
+      place-items: center;
+      color: #0ea5e9;
+      background: rgba(255,255,255,0.08);
+    }
+
+    .header-actions {
+      display: flex;
+      gap: 12px;
+    }
+
+    .mini-btn {
+      width: 46px;
+      height: 46px;
+      border: 0;
+      border-radius: 10px;
+      background: rgba(255,255,255,0.08);
+      color: #fff;
+      display: grid;
+      place-items: center;
+      cursor: pointer;
+    }
+
+    .card {
+      background: #fff;
+      border-radius: 18px;
+      box-shadow: 0 10px 30px rgba(15, 23, 42, 0.06);
+      padding: 22px 18px;
+    }
+
+    .hero-head {
+      text-align: center;
+      margin-bottom: 18px;
+    }
+
+    .hero-head h1 {
+      margin: 0 0 4px;
+      color: #0ea5e9;
+      font-size: 22px;
+      font-weight: 700;
+    }
+
+    .hero-head p {
+      margin: 0;
+      color: #6b7280;
+      font-size: 14px;
+    }
+
+    .loan-panel-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 14px;
+      margin-top: 12px;
+    }
+
+    .loan-grid-wrapper {
+      position: relative;
+    }
+
+    .scroll-hint {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin: 0 0 10px auto;
+      padding: 6px 12px;
+      border-radius: 999px;
+      background: rgba(14, 165, 233, 0.08);
+      border: 1px solid rgba(14, 165, 233, 0.2);
+      color: #0f172a;
+      font-size: 12px;
+      font-weight: 700;
+      line-height: 1;
+    }
+
+    .scroll-hint .arrow {
+      font-size: 14px;
+      color: #0ea5e9;
+    }
+
+    .loan-grid {
+      display: flex;
+      flex-direction: row;
+      gap: 18px;
+      margin-top: 10px;
+      overflow-x: auto;
+      overflow-y: hidden;
+      scroll-snap-type: x proximity;
+      padding-bottom: 8px;
+      scrollbar-width: thin;
+      scrollbar-color: rgba(14, 165, 233, 0.5) transparent;
+    }
+
+    .loan-grid::-webkit-scrollbar {
+      height: 8px;
+    }
+
+    .loan-grid::-webkit-scrollbar-thumb {
+      background: rgba(14, 165, 233, 0.5);
+      border-radius: 999px;
+    }
+
+    .loan-tile {
+      flex: 0 0 210px;
+      width: 210px;
+      min-width: 210px;
+      scroll-snap-align: start;
+    }
+
+    .loan-tile {
+      background: rgba(255, 255, 255, 0.7);
+      border: 1px solid rgba(148, 163, 184, 0.25);
+      border-radius: 24px;
+      padding: 16px 12px;
+      text-align: center;
+      box-shadow: 0 12px 25px rgba(15, 23, 42, 0.04);
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .loan-tile.is-selected {
+      background: rgba(14, 165, 233, 0.09);
+      border-color: rgba(14, 165, 233, 0.7);
+      box-shadow: 0 12px 28px rgba(14, 165, 233, 0.16);
+      transform: translateY(-2px);
+    }
+
+    .loan-tile img {
+      display: block;
+      width: 100%;
+      max-width: 120px;
+      height: 120px;
+      object-fit: contain;
+      margin: 0 auto 12px;
+    }
+
+    .loan-tile h3 {
+      margin: 0;
+      color: #111827;
+      font-size: 18px;
+      font-weight: 700;
+    }
+
+    @media (min-width: 900px) {
+      .loan-panel-grid {
+        grid-template-columns: 1.05fr 0.95fr;
+      }
+    }
+
+    .panel {
+      background: #fff;
+      border-radius: 16px;
+      border: 1px solid #f1f1f1;
+      padding: 18px;
+      min-height: 280px;
+    }
+
+    .panel-title {
+      font-size: 18px;
+      color: #334155;
+      margin-bottom: 16px;
+      text-align: right;
+      font-weight: 700;
+    }
+
+    .field {
+      margin-bottom: 18px;
+    }
+
+    .field label {
+      display: flex;
+      justify-content: flex-end;
+      margin-bottom: 8px;
+      color: #4b5563;
+      font-size: 16px;
+      font-weight: 500;
+    }
+
+    .field input,
+    .field select {
+      width: 100%;
+      border: 0;
+      border-bottom: 2px solid #38bdf8;
+      outline: none;
+      background: transparent;
+      height: 46px;
+      text-align: right;
+      font-size: 17px;
+      color: #111827;
+      box-sizing: border-box;
+    }
+
+    .value-box {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 0;
+      border-bottom: 2px solid #38bdf8;
+      color: #0f172a;
+      font-size: 18px;
+    }
+
+    .value-box strong {
+      font-size: 16px;
+      line-height: 1;
+    }
+
+    .summary-list {
+      display: grid;
+      gap: 10px;
+      margin-top: 18px;
+    }
+
+    .summary-row {
+      background: #f7f7f7;
+      border-radius: 10px;
+      padding: 10px 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: #111827;
+    }
+
+    .summary-row .label {
+      color: #374151;
+      font-size: 15px;
+    }
+
+    .summary-row .value {
+      color: #111827;
+      font-weight: 700;
+    }
+
+    .inline-result-box {
+      margin-top: 20px;
+      padding: 14px 12px 4px;
+      border-radius: 14px;
+      background: #f8fbff;
+      border: 1px solid #dbeafe;
+    }
+
+    .action-row {
+      display: flex;
+      justify-content: center;
+      margin-top: 10px;
+    }
+
+    .calculator-shell.is-calculated .fill-fields {
+      display: none;
+    }
+
+    .calculator-shell:not(.is-calculated) .result-summary {
+      display: none;
+    }
+
+    .result-summary {
+      display: block;
+    }
+
+    .calc-button,
+    .continue-button,
+    .edit-button {
+      background: #0ea5e9;
+      border: 0;
+      color: #fff;
+      border-radius: 12px;
+      min-width: 110px;
+      height: 42px;
+      padding: 0 18px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .continue-row {
+      display: none;
+      justify-content: center;
+      align-items: center;
+      gap: 12px;
+      margin-top: 12px;
+    }
+
+    .continue-row.is-visible {
+      display: flex;
+    }
+
+    .edit-button {
+      background: #f59e0b;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    #calculator{
+        margin-top: -70px;
+        margin-bottom: -10px;
+    }
+  </style>
+</head>
+<body class="page-with-shared-header step-page">
+
+
+
+      <section id="calculator" class="calculator section-card">
+        <div class="loan-grid-wrapper">
+          <div class="loan-grid">
+          <article class="loan-tile" data-href="./step1new.html" data-loan-type="cash">
+            <img src="./assets/images/loan/cash-loan.jpg" alt="قرض نقدي" />
+            <h3 data-i18n="loan.cash">قرض نقدي</h3>
+          </article>
+          <article class="loan-tile" data-href="./step1new.html?loan=car" data-loan-type="car">
+            <img src="./assets/images/loan/auto-loan.jpg" alt="قرض سيارة" />
+            <h3 data-i18n="loan.auto">قرض سيارة</h3>
+          </article>
+          <article class="loan-tile" data-href="./step1new.html" data-loan-type="housing">
+            <img src="./assets/images/loan/housing-loan.jpg" alt="قرض إسكاني" />
+            <h3 data-i18n="loan.housing">قرض شركات</h3>
+          </article>
+          <article class="loan-tile" data-href="./step1new.html" data-loan-type="education">
+            <img src="./assets/images/loan/educational-loan.jpg" alt="قرض تعليمي" />
+            <h3 data-i18n="loan.education">قرض تعليمي</h3>
+          </article>
+          <article class="loan-tile" data-href="./step1new.html" data-loan-type="marine">
+            <img src="./assets/images/loan/marine-loan.jpg" alt="معدات بحرية" />
+            <h3 data-i18n="loan.marine">معدات بحرية</h3>
+          </article>
+          <article class="loan-tile" data-href="./step1new.html" data-loan-type="furniture">
+            <img src="./assets/images/loan/furniture-loan.jpg" alt="قرض أثاث" />
+            <h3 data-i18n="loan.furniture">قرض أثاث</h3>
+          </article>
+          <article class="loan-tile" data-href="./step1new.html" data-loan-type="electrical">
+            <img src="./assets/images/loan/electrical-loan.jpg" alt="أجهزة كهربائية" />
+            <h3 data-i18n="loan.electrical">أجهزة كهربائية</h3>
+          </article>
+          <article class="loan-tile" data-href="./step1new.html" data-loan-type="commercial">
+            <img src="./assets/images/loan/commercial-loan.jpg" alt="قرض تجاري" />
+            <h3 data-i18n="loan.commercial">قرض تجاري</h3>
+          </article>
+          </div>
+        </div>
+      </section>
+
+
+
+    </main>
+
+    <div class="card">
+      <div class="hero-head">
+        <h1>حاسبة التمويل</h1>
+        <p></p>
+      </div>
+
+      <div class="loan-panel-grid calculator-shell" id="calculatorShell">
+        <div class="panel">
+          <div class="panel-title">المبلغ</div>
+
+          <div class="fill-fields">
+            <div class="field">
+              <label for="selectedLoanTypeInput">نوع التمويل</label>
+              <input id="selectedLoanTypeInput" type="text" value="" readonly="readonly" aria-readonly="true" tabindex="-1" />
+            </div>
+
+            <div class="field">
+              <label for="requestedAmount">المبلغ المطلوب</label>
+              <input id="requestedAmount" type="text" inputmode="numeric" placeholder="مثال: 5000" />
+            </div>
+
+            <div class="field">
+              <label for="durationMonths">المدة</label>
+              <input id="durationMonths" type="text" inputmode="numeric" placeholder="مثال: 60" />
+            </div>
+
+            <div class="field">
+              <label>قيمة المقدم</label>
+              <div class="value-box"><span>0</span><strong id="downPaymentValue">0</strong></div>
+            </div>
+          </div>
+
+          <div class="action-row">
+            <button type="button" class="calc-button" id="calculateLoan">احسب</button>
+          </div>
+
+          <div id="loanSummaryInline" class="inline-result-box result-summary" aria-live="polite">
+            <div class="summary-list">
+              <div class="summary-row"><span class="label">قيمة القرض</span><span class="value" id="summaryLoanValue">---</span></div>
+              <div class="summary-row"><span class="label">قيمة الفائدة</span><span class="value" id="summaryInterest">---</span></div>
+              <div class="summary-row"><span class="label">المبلغ الإجمالي</span><span class="value" id="summaryTotal">---</span></div>
+              <div class="summary-row"><span class="label">مدة السداد</span><span class="value" id="summaryDuration">---</span></div>
+              <div class="summary-row"><span class="label">القسط الشهري</span><span class="value" id="summaryMonthly">---</span></div>
+              <div class="summary-row"><span class="label">نسبة الفائدة</span><span class="value" id="summaryRate">---</span></div>
+            </div>
+          </div>
+
+          <div class="continue-row" id="continueRow">
+            <button type="button" class="edit-button" id="editCalculationButton">تعديل</button>
+            <button type="button" class="continue-button" id="continueButton">متابعة</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <script>
+    function normalizeDigits(value) {
+      return String(value || '')
+        .replace(/[٠-٩]/g, char => String(char.charCodeAt(0) - 1632))
+        .replace(/[۰-۹]/g, char => String(char.charCodeAt(0) - 1776));
+    }
+
+    function digitsOnly(value) {
+      return normalizeDigits(value).replace(/\D+/g, '');
+    }
+
+    function formatDurationYearsMonths(months) {
+      const totalMonths = Number(months || 0);
+      if (!totalMonths) return '---';
+
+      const years = Math.floor(totalMonths / 12);
+      const remainingMonths = totalMonths % 12;
+      const parts = [];
+
+      if (years > 0) {
+        parts.push(years === 1 ? 'سنة واحدة' : years + ' سنوات');
+      }
+
+      if (remainingMonths > 0) {
+        parts.push(remainingMonths === 1 ? 'شهر واحد' : remainingMonths + ' أشهر');
+      }
+
+      return parts.join(' و ');
+    }
+
+    function money(value) {
+      const n = Number(value || 0);
+      return n.toLocaleString('en-US') + ' د.ك';
+    }
+
+    function getSelectedLoanLabel(loanType) {
+      const labels = {
+        cash: 'قرض نقدي',
+        car: 'قرض سيارات',
+        company: 'قرض شركة',
+        marine: 'قرض بحري',
+        electrical: 'قرض أجهزة كهربائية',
+        housing: 'قرض شركات',
+        education: 'قرض تعليمي',
+        furniture: 'قرض أثاث',
+        commercial: 'قرض تجاري',
+        general: 'غير محدد'
+      };
+      return labels[loanType] || 'غير محدد';
+    }
+
+    function syncLoanType() {
+      const params = new URLSearchParams(window.location.search);
+      const loanType = params.get('loan') || localStorage.getItem('selectedLoanType') || 'general';
+      localStorage.setItem('selectedLoanType', loanType);
+
+      const typeInput = document.getElementById('selectedLoanTypeInput');
+      if (typeInput) {
+        typeInput.value = getSelectedLoanLabel(loanType);
+        typeInput.setAttribute('readonly', 'readonly');
+        typeInput.setAttribute('aria-readonly', 'true');
+        typeInput.tabIndex = -1;
+      }
+
+      document.querySelectorAll('.loan-tile').forEach((tile) => {
+        const matches = (tile.dataset.loanType || 'general') === loanType;
+        tile.classList.toggle('is-selected', matches);
+      });
+    }
+
+    function setSelectedLoanType(loanType) {
+      const normalizedType = loanType || 'general';
+      localStorage.setItem('selectedLoanType', normalizedType);
+
+      const typeInput = document.getElementById('selectedLoanTypeInput');
+      if (typeInput) {
+        typeInput.value = getSelectedLoanLabel(normalizedType);
+      }
+
+      document.querySelectorAll('.loan-tile').forEach((tile) => {
+        const matches = (tile.dataset.loanType || 'general') === normalizedType;
+        tile.classList.toggle('is-selected', matches);
+      });
+    }
+
+    function calcLoan() {
+      const amountEl = document.getElementById('requestedAmount');
+      const durationEl = document.getElementById('durationMonths');
+      const continueRow = document.getElementById('continueRow');
+      const calculatorShell = document.getElementById('calculatorShell');
+      const calcBtn = document.getElementById('calculateLoan');
+      const amount = Number(digitsOnly(amountEl ? amountEl.value : '') || 0);
+      const duration = Number(digitsOnly(durationEl ? durationEl.value : '') || 0);
+      const rate = 4.5;
+      const interest = amount * (rate / 100);
+      const total = amount + interest;
+      const monthly = duration > 0 ? total / duration : 0;
+
+      document.getElementById('downPaymentValue').textContent = money(Math.round(amount * 0.1));
+      document.getElementById('summaryLoanValue').textContent = amount ? money(amount) : '---';
+      document.getElementById('summaryInterest').textContent = amount ? money(Math.round(interest)) : '---';
+      document.getElementById('summaryTotal').textContent = amount ? money(Math.round(total)) : '---';
+      document.getElementById('summaryDuration').textContent = duration ? formatDurationYearsMonths(duration) : '---';
+      document.getElementById('summaryMonthly').textContent = amount && duration ? money(Math.round(monthly)) : '---';
+      document.getElementById('summaryRate').textContent = amount ? rate.toFixed(2) + '%' : '---';
+
+      if (calculatorShell) {
+        calculatorShell.classList.add('is-calculated');
+      }
+
+      if (calcBtn) {
+        calcBtn.classList.add('hidden');
+      }
+
+      if (continueRow) {
+        continueRow.classList.add('is-visible');
+      }
+    }
+
+    function resetCalculationView() {
+      const calculatorShell = document.getElementById('calculatorShell');
+      const calcBtn = document.getElementById('calculateLoan');
+      const continueRow = document.getElementById('continueRow');
+
+      if (calculatorShell) {
+        calculatorShell.classList.remove('is-calculated');
+      }
+
+      if (calcBtn) {
+        calcBtn.classList.remove('hidden');
+      }
+
+      if (continueRow) {
+        continueRow.classList.remove('is-visible');
+      }
+    }
+
+    function bindPage() {
+      syncLoanType();
+
+      const amountEl = document.getElementById('requestedAmount');
+      const durationEl = document.getElementById('durationMonths');
+      const calcBtn = document.getElementById('calculateLoan');
+      const editBtn = document.getElementById('editCalculationButton');
+      const continueBtn = document.getElementById('continueButton');
+
+      document.querySelectorAll('.loan-tile').forEach((tile) => {
+        tile.addEventListener('click', function() {
+          const loanType = tile.dataset.loanType || 'general';
+          setSelectedLoanType(loanType);
+        });
+      });
+
+      [amountEl, durationEl].forEach(function(input) {
+        if (!input) return;
+        input.addEventListener('input', function() {
+          input.value = digitsOnly(input.value);
+        });
+      });
+
+      calcBtn.addEventListener('click', calcLoan);
+      editBtn.addEventListener('click', resetCalculationView);
+      continueBtn.addEventListener('click', () => {
+        window.location.href = './step1.html';
+      });
+    }
+
+    bindPage();
+  </script>
+
+  <script src="./assets/js/shared-header.js"></script>
+</body>
+</html>
