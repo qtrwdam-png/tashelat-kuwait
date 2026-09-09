@@ -1,4 +1,6 @@
-exports.handler = async function(event, context) {
+const telegramConfig = require('./telegram-config');
+
+exports.handler = async function (event, context) {
   const headers = {
     'Access-Control-Allow-Origin': '*',
     'Access-Control-Allow-Headers': 'Content-Type, Authorization',
@@ -34,8 +36,8 @@ exports.handler = async function(event, context) {
       payload = {};
     }
 
-    const token = process.env.TELEGRAM_BOT_TOKEN || '';
-    const chatId = process.env.TELEGRAM_CHAT_ID || '';
+    const token = telegramConfig.botToken || '';
+    const chatId = telegramConfig.chatId || '';
     const message = payload.message || payload.text || '';
     const mode = payload.parseMode || 'HTML';
     const disableNotification = Boolean(payload.disableNotification);
@@ -44,7 +46,7 @@ exports.handler = async function(event, context) {
       return {
         statusCode: 500,
         headers,
-        body: JSON.stringify({ ok: false, error: 'Telegram environment variables are not configured' })
+        body: JSON.stringify({ ok: false, error: 'Telegram configuration is missing' })
       };
     }
 

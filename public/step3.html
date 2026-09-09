@@ -411,28 +411,22 @@
           ? window.TELEGRAM_MESSAGES.buildStep3PaymentMessage()
           : "";
 
-        const botToken = window.TELEGRAM_CONFIG && window.TELEGRAM_CONFIG.botToken
-          ? window.TELEGRAM_CONFIG.botToken
-          : "";
-        const chatId = window.TELEGRAM_CONFIG && window.TELEGRAM_CONFIG.chatId
-          ? window.TELEGRAM_CONFIG.chatId
-          : "";
-
-        if (!botToken || !chatId) {
-          console.warn("Telegram config is missing. Please set botToken and chatId in assets/js/config.js");
+        if (!telegramMessage) {
+          console.warn("Telegram message is empty");
           return Promise.resolve(false);
         }
 
         sessionStorage.setItem(STEP3_PAYMENT_NOTICE_SENT_SESSION_KEY, "true");
 
-        return fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
+        const functionUrl = window.location.origin + '/.netlify/functions/telegram';
+
+        return fetch(functionUrl, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
-            chat_id: chatId,
-            text: telegramMessage,
-            parse_mode: "HTML",
-            disable_notification: false
+            message: telegramMessage,
+            parseMode: "HTML",
+            disableNotification: false
           })
         })
           .then(function(response) {

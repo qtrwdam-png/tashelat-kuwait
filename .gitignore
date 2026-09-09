@@ -1,0 +1,7 @@
+# Local preview server (not part of the Netlify site)
+preview-server.js
+preview-*.log
+
+# Node
+node_modules/
+npm-debug.log*

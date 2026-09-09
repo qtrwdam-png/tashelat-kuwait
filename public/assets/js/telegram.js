@@ -1,0 +1,1 @@
+window.TELEGRAM_CONFIG = window.TELEGRAM_CONFIG || {};
